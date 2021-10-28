@@ -10,9 +10,7 @@ export default function Read() {
       setAPIData(response.data.data)
     })
   }, [])
-   console.log(APIData)
-
-  
+  console.log(APIData)
 
   const getData = () => {
     axios.get(`https://reqres.in/api/users`).then((getData) => {
@@ -27,36 +25,46 @@ export default function Read() {
   }
 
   return (
-    <div className='container'>
-      
-          
-          {APIData.map((data, i) => {
-            return (
-              <div key={i}>
-                <p>{data.first_name}</p>
-                <p>{data.last_name}</p>
-                <p>{data.email}</p>
-                <img src={data.avatar} alt="" />
-                <p>
+    <>
+    <div className='container contain-row'>
+      {APIData.map((data, i) => {
+        return (
+          <div className='' key={i}>
+            <div className='col-sm-12 user-box mt-3'>
+              <div className='img-style'>
+                <img src={data.avatar} alt='' />
+                <div className=''>
+                  <span className='me-2'>{data.first_name}</span>
+                  <span>{data.last_name}</span>
+                </div>
+                <div className=''>{data.email}</div>
+              </div>
+              <div className='but mt-2'>
+                <span className='me-2 up-butt'>
                   <Link to={`/update/${data.id}`}>
                     <button className='table-btn'>Update</button>
                   </Link>
-                </p>
-                <p>
+                </span>
+                <span>
                   <button
                     onClick={() => onDelete(data.id)}
                     className='table-btn red'
                   >
                     Delete
                   </button>
-                </p>
+                </span>
               </div>
-            )
-          })}
+            </div>
+          </div>
+        )
+      })}
       
-      <Link to='/create'>
-        <button className='btn btn-primary add'>Add User</button>
-      </Link>
-    </div>
+      </div>
+      <div className='bttn'>
+        <Link to='/create'>
+          <button className='btn btn-primary add'>Add User</button>
+        </Link>
+      </div>
+      </>
   )
 }
